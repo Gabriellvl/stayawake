@@ -10,6 +10,9 @@ allow sleep again.
 | `stayawake on` | Keeps your Mac awake |
 | `stayawake off` | Allows normal sleep |
 | `stayawake` or `stayawake status` | Shows the current setting |
+| `stayawake buddy` | Shows Harrie the Cane Corso, on watch or asleep |
+| `stayawake updates` | Checks GitHub for a newer release |
+| `stayawake updates --open` | Opens the release page |
 
 ## Install with Homebrew
 
@@ -24,6 +27,24 @@ Use `brew upgrade Gabriellvl/tap/stayawake` to update. Use
 
 `stayawake --help` lists all commands and `stayawake --version` shows
 the installed version.
+
+## Meet Harrie
+
+Harrie is the Cane Corso in your terminal. He keeps watch when sleep is
+disabled, curls up when sleep is allowed, and perks up when a new release
+is available. Run `stayawake buddy` to see him without changing the setting.
+
+During normal interactive use, stayawake checks the public GitHub release
+page at most once a day after a successful check. A network failure is
+retried after 15 minutes. Harrie alerts you once per new version. The check
+times out after two seconds. Set `STAYAWAKE_NO_UPDATE_CHECK=1` to disable
+automatic checks, or run `stayawake updates` to check on demand. Set
+`NO_COLOR=1` for plain text art.
+
+For email, use **Watch → Custom → Releases** on
+[GitHub](https://github.com/Gabriellvl/stayawake) and enable email for
+watched repositories in your
+[notification settings](https://github.com/settings/notifications).
 
 ## Download from GitHub
 
