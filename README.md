@@ -1,22 +1,28 @@
 # stayawake
 
-A sleep switch for your Mac. Turn it **on** to stay awake and **off** to
-allow sleep again.
+![stayawake. Keep your Mac awake while your agents work. Whitney, a white Dogo Argentino, sits beside a laptop.](assets/stayawake-banner.png)
+
+An open-source sleep switch for macOS. Keep your Mac awake during long-running
+jobs, see the current setting, or restore normal sleep.
 
 [![macOS checks](https://github.com/Gabriellvl/stayawake/actions/workflows/macos.yml/badge.svg)](https://github.com/Gabriellvl/stayawake/actions/workflows/macos.yml)
 
-| Command | What it does |
-| --- | --- |
-| `stayawake on` | Keeps your Mac awake |
-| `stayawake off` | Allows normal sleep |
-| `stayawake` or `stayawake status` | Shows the current setting |
-
-## Install with Homebrew
+## Quick start
 
 ```bash
 brew install Gabriellvl/tap/stayawake
 stayawake status
 ```
+
+| Command | What it does |
+| --- | --- |
+| `stayawake on` | Keeps your Mac awake |
+| `stayawake off` | Allows normal sleep |
+| `stayawake status` | Shows the current setting |
+
+Running `stayawake` on its own also shows the status.
+[Download the script](https://github.com/Gabriellvl/stayawake/releases/latest)
+if you install without Homebrew.
 
 Use `brew upgrade Gabriellvl/tap/stayawake` to update. Use
 `brew uninstall Gabriellvl/tap/stayawake` to remove the command. Run
@@ -31,7 +37,6 @@ The [latest release](https://github.com/Gabriellvl/stayawake/releases/latest)
 offers the standalone script and a macOS archive with the script, README,
 and license. Verify your download with the matching entry in `SHA256SUMS`
 (`shasum -a 256 <filename>`).
-
 
 From the folder containing the downloaded or extracted script:
 
@@ -84,6 +89,16 @@ Run `stayawake off` if you want normal sleep restored, then run
 
 The current release supports macOS and uses its built-in `pmset`.
 Linux, Windows, BSD, and other systems still need their own sleep backends.
+
+## Meet Whitney
+
+<img src="assets/whitney.png" alt="Whitney, the stayawake mascot" width="96">
+
+Whitney is our Dogo Argentino and the project’s watchdog. She’s the
+inspiration for a future feature that could alert you when low battery or
+a lost Wi-Fi connection puts a run at risk.
+
+Want to help? See [how to contribute](CONTRIBUTING.md).
 
 ## License
 
