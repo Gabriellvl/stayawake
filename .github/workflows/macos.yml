@@ -20,8 +20,10 @@ jobs:
         shell: bash
         run: |
           bash -n stayawake
+          bash tests/updates.sh
           ./stayawake --help
           ./stayawake --version
+          ./stayawake buddy | grep -E 'Harrie · (on watch|off duty)'
           ./stayawake status | grep -E '^(ON|OFF) '
           prefix="$RUNNER_TEMP/stayawake installation"
           make install PREFIX="$prefix"
