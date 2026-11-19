@@ -1,4 +1,14 @@
-# stayawake
+<p align="center">
+  <img src="docs/whitney-logo.png" width="112" alt="Whitney, the stayawake logo">
+</p>
+
+<h1 align="center">stayawake</h1>
+
+<p align="center">
+  <a href="#install-with-homebrew">Install</a> ·
+  <a href="#whitney-your-terminal-watchdog">Meet Whitney</a> ·
+  <a href="#whitneys-bed">Wake Whitney</a>
+</p>
 
 **Keep your Mac awake while your agents work.**
 
@@ -8,7 +18,7 @@ restore normal sleep. `stayawake status` tells you which mode you’re in.
 
 **Meet Whitney, the real-life Dogo Argentino behind stayawake.** Her head is the logo and her full-body sprite is your terminal watchdog.
 
-![Animated terminal preview of Whitney on watch, asleep, and showing an example release alert.](docs/stayawake-terminal.gif)
+![Animated terminal preview of Whitney on watch, asleep, and showing an example release alert.](docs/whitney-terminal.gif)
 
 [![macOS checks](https://github.com/Gabriellvl/stayawake/actions/workflows/macos.yml/badge.svg)](https://github.com/Gabriellvl/stayawake/actions/workflows/macos.yml)
 
@@ -38,6 +48,8 @@ use [the Git checkout](#run-from-the-repo) to try the latest code.
 
 ## Whitney, your terminal watchdog
 
+<img src="docs/whitney-logo.png" width="52" align="right" alt="">
+
 The white Dogo Argentino who inspired stayawake now has three terminal poses.
 She stands watch when your Mac is set to stay awake, curls up when it can
 sleep, and perks up when there is a new release. Run `stayawake buddy` to see
@@ -56,6 +68,8 @@ watched repositories in your
 [notification settings](https://github.com/settings/notifications).
 
 ## Demo video
+
+<img src="docs/whitney-logo.png" width="42" align="right" alt="">
 
 *Video coming soon. The terminal GIF above previews the sleep switch and release alerts.*
 
@@ -128,3 +142,20 @@ Linux, Windows, BSD, and other systems still need their own sleep backends.
 ## License
 
 [MIT](LICENSE)
+
+## Whitney's bed
+
+<details>
+<summary><img src="docs/whitney-logo.png" width="26" alt=""> &nbsp; Peek in on Whitney</summary>
+
+<p><img src="docs/whitney-asleep.png" width="680" alt="Whitney curled up asleep in the terminal"></p>
+
+<details>
+<summary>🐾 Wake Whitney</summary>
+
+<p><img src="docs/whitney-awake.png" width="680" alt="Whitney standing up and on watch in the terminal"></p>
+
+She’s on watch. Close this panel to let her go back to sleep.
+
+</details>
+</details>
