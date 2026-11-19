@@ -1,7 +1,12 @@
 # stayawake
 
-A sleep switch for your Mac. Turn it **on** to stay awake and **off** to
-allow sleep again.
+**Keep your Mac awake while your agents work.**
+
+Install stayawake when a long-running agent, build, or script needs your Mac
+to stay awake. Use `stayawake on` before starting, then `stayawake off` to
+restore normal sleep. `stayawake status` tells you which mode you’re in.
+
+![Animated terminal preview introducing Whitney and Harrie, with Harrie on watch, asleep, and showing an example release alert.](docs/stayawake-terminal.gif)
 
 [![macOS checks](https://github.com/Gabriellvl/stayawake/actions/workflows/macos.yml/badge.svg)](https://github.com/Gabriellvl/stayawake/actions/workflows/macos.yml)
 
@@ -26,11 +31,15 @@ Use `brew upgrade Gabriellvl/tap/stayawake` to update. Use
 `stayawake off` before uninstalling if you want to restore normal sleep.
 
 `stayawake --help` lists all commands and `stayawake --version` shows
-the installed version.
+the installed version. If your installed release predates the terminal buddy,
+use [the Git checkout](#run-from-the-repo) to try the latest code.
 
-## Meet Harrie
+## Meet the dogs
 
-Harrie is the Cane Corso in your terminal. He keeps watch when sleep is
+**Whitney** is the white Dogo Argentino who inspired the watchdog and is the
+face of stayawake.
+
+**Harrie** is the Cane Corso in your terminal. He keeps watch when sleep is
 disabled, curls up when sleep is allowed, and perks up when a new release
 is available. Run `stayawake buddy` to see him without changing the setting.
 
@@ -45,6 +54,10 @@ For email, use **Watch → Custom → Releases** on
 [GitHub](https://github.com/Gabriellvl/stayawake) and enable email for
 watched repositories in your
 [notification settings](https://github.com/settings/notifications).
+
+## Demo video
+
+*Video coming soon. The terminal GIF above previews the sleep switch and release alerts.*
 
 ## Download from GitHub
 
@@ -83,8 +96,14 @@ is available for MacPorts users. Clone this repo, add the absolute path to
 ```bash
 git clone https://github.com/Gabriellvl/stayawake.git
 cd stayawake
-./stayawake
+./stayawake buddy
+./stayawake updates
 ```
+
+To see both poses on your Mac, run `./stayawake on`, then `./stayawake off`.
+These two commands change the system sleep setting and may prompt for your
+administrator password. If an agent is running, wait until it finishes before
+turning stayawake off.
 
 From the checkout, `make install` installs to `~/.local/bin`. Set
 `PREFIX` to use a different location.
