@@ -6,13 +6,12 @@ RELEASE_URL=https://github.com/Gabriellvl/stayawake/releases
 
 usage() {
   cat <<'HELP'
-Usage: stayawake [on|off|status|buddy [whitney]|updates [--open]|--help|--version]
+Usage: stayawake [on|off|status|buddy|updates [--open]|--help|--version]
 
   on              Keep your Mac awake
   off             Allow your Mac to sleep
   status          Show the current setting (default)
-  buddy           See Harrie the Cane Corso on watch or asleep
-  buddy whitney   See Whitney, the face of stayawake
+  buddy           See Whitney the Dogo Argentino on watch or asleep
   updates         Check GitHub for a newer release
   updates --open  Open the GitHub release page
   --help          Show this help
@@ -52,7 +51,7 @@ buddy_sprite() {
 
 SPRITE
       ;;
-    whitney) cat <<'SPRITE'
+    awake|alert) cat <<'SPRITE'
                                      #
                                  ####.####
                                 ##-.......#
@@ -79,48 +78,17 @@ SPRITE
       #+++++++               +++++++#
 SPRITE
       ;;
-    awake|alert) cat <<'SPRITE'
-                                  #
-                                 ##-#####
-                               ##----+++##
-                              ###-----+++#
-                              ##------..++######
- #                           ##+-----++.++++++..
-###                          #+++----+++++-----#
- ##             #############++++---++++++-----#
- ###      ###++++++++++++++++++++=+-+++++------#
-  ##++   ##++++++++++++++++++++++====+++#-----#
-  ###++###+++++++++++++++++++++++=======#-----#
-    ##++++++++++++++++++++++++++++++===--
-     ###++++++++++++++++++++++++++++++#
-       ##++++++++++++++++++++++++++++#
-         #+++++++++++++++++++++++++-#
-          +++++++----++++++++++++---#
-         +++++++-------     +++++--##
-         ++++++-------      +++++--#
-        +++++++------       +++++--#
-        ++++++------        +++++---
-       +++++++------        +++++-----
-       +++#####-----        +####+++--
-        ########             #######--
-        ########             #######
-SPRITE
-      ;;
   esac
 }
 
 buddy_color() {
-  color=''
-  case "$2" in
+  case "$1" in
+    '#') color=240 ;;
+    '+') color=230 ;;
+    '.') color=255 ;;
+    '-') color=180 ;;
     '=') color=214 ;;
-    ' ') color='' ;;
-    *)
-      if [[ $1 == whitney ]]; then
-        case "$2" in '#') color=240 ;; '+') color=230 ;; '.') color=255 ;; '-') color=180 ;; esac
-      else
-        case "$2" in '#') color=242 ;; '+') color=239 ;; '.') color=230 ;; '-') color=236 ;; esac
-      fi
-      ;;
+    *) color='' ;;
   esac
 }
 
@@ -139,8 +107,8 @@ draw_buddy() {
   while IFS= read -r top; do
     IFS= read -r bottom || bottom=''
     for ((index = 0; index < ${#top} || index < ${#bottom}; index++)); do
-      buddy_color "$mood" "${top:index:1}"; upper=$color
-      buddy_color "$mood" "${bottom:index:1}"; lower=$color
+      buddy_color "${top:index:1}"; upper=$color
+      buddy_color "${bottom:index:1}"; lower=$color
       if [[ -n $upper && -n $lower ]]; then
         printf '\033[38;5;%s;48;5;%sm▀\033[0m' "$upper" "$lower"
       elif [[ -n $upper ]]; then
@@ -210,7 +178,7 @@ check_updates() {
   if ! latest=$(latest_release); then
     write_release_cache "$file" "$now" '-' "$announced" 2>/dev/null || true
     if [[ $mode == explicit ]]; then
-      printf 'Harrie couldn’t reach the release page. Try again later.\n' >&2
+      printf 'Whitney couldn’t reach the release page. Try again later.\n' >&2
       return 1
     fi
     return 0
@@ -218,11 +186,11 @@ check_updates() {
   if newer_than "$latest" "$VERSION" && [[ $mode == explicit || $latest != "$announced" ]]; then
     announced=$latest
     draw_buddy alert
-    printf 'Harrie spotted stayawake v%s! You have v%s.\n' "$latest" "$VERSION"
+    printf 'Whitney spotted stayawake v%s! You have v%s.\n' "$latest" "$VERSION"
     printf 'Homebrew: brew upgrade Gabriellvl/tap/stayawake\n'
     printf 'Release: %s/tag/v%s\n' "$RELEASE_URL" "$latest"
   elif [[ $mode == explicit ]]; then
-    printf 'Harrie checked. You’re up to date (v%s installed; v%s latest).\n' "$VERSION" "$latest"
+    printf 'Whitney checked. You’re up to date (v%s installed; v%s latest).\n' "$VERSION" "$latest"
   fi
   write_release_cache "$file" "$now" "$latest" "$announced" 2>/dev/null || true
 }
@@ -253,9 +221,9 @@ show_sleep_state() {
   if [[ $action == buddy || -t 1 && ${TERM:-dumb} != dumb ]]; then
     draw_buddy "$mood"
     if [[ $mood == awake ]]; then
-      printf 'Harrie · on watch\n'
+      printf 'Whitney · on watch\n'
     else
-      printf 'Harrie · off duty\n'
+      printf 'Whitney · off duty\n'
     fi
   fi
   check_updates passive
@@ -268,8 +236,7 @@ main() {
     return
   fi
   if [[ $action == buddy && $# == 2 && $2 == whitney ]]; then
-    draw_buddy whitney
-    printf 'Whitney · the face of stayawake\n'
+    show_sleep_state buddy
     return
   fi
   if [[ $# -gt 1 ]]; then
