@@ -6,6 +6,8 @@ Install stayawake when a long-running agent, build, or script needs your Mac
 to stay awake. Use `stayawake on` before starting, then `stayawake off` to
 restore normal sleep. `stayawake status` tells you which mode you’re in.
 
+**Whitney is the face of stayawake. Harrie shows your sleep setting and alerts you to new releases.**
+
 ![Animated terminal preview introducing Whitney and Harrie, with Harrie on watch, asleep, and showing an example release alert.](docs/stayawake-terminal.gif)
 
 [![macOS checks](https://github.com/Gabriellvl/stayawake/actions/workflows/macos.yml/badge.svg)](https://github.com/Gabriellvl/stayawake/actions/workflows/macos.yml)
@@ -37,12 +39,14 @@ use [the Git checkout](#run-from-the-repo) to try the latest code.
 
 ## Meet the dogs
 
-**Whitney** is the white Dogo Argentino who inspired the watchdog and is the
-face of stayawake. Run `stayawake buddy whitney` to see her in the terminal.
+**Whitney · the face of stayawake.** The white Dogo Argentino is the
+real-life watchdog who inspired the project. Her head is the logo.
+`stayawake buddy whitney` is a full-body cameo that only displays her artwork.
 
-**Harrie** is the Cane Corso in your terminal. He keeps watch when sleep is
-disabled, curls up when sleep is allowed, and perks up when a new release
-is available. Run `stayawake buddy` to see him without changing the setting.
+**Harrie · your terminal watchdog.** The Cane Corso shows your Mac's
+sleep setting and alerts you to new releases. He's on watch when sleep is
+disabled and curled up when sleep is allowed. Run `stayawake buddy` to
+check the setting without changing it.
 
 During normal interactive use, stayawake checks the public GitHub release
 page at most once a day after a successful check. A network failure is

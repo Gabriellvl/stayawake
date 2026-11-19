@@ -12,7 +12,7 @@ Usage: stayawake [on|off|status|buddy [whitney]|updates [--open]|--help|--versio
   off             Allow your Mac to sleep
   status          Show the current setting (default)
   buddy           See Harrie the Cane Corso on watch or asleep
-  buddy whitney   See Whitney, the Dogo Argentino mascot
+  buddy whitney   See Whitney, the face of stayawake
   updates         Check GitHub for a newer release
   updates --open  Open the GitHub release page
   --help          Show this help
@@ -269,7 +269,7 @@ main() {
   fi
   if [[ $action == buddy && $# == 2 && $2 == whitney ]]; then
     draw_buddy whitney
-    printf 'Whitney · watchdog mascot\n'
+    printf 'Whitney · the face of stayawake\n'
     return
   fi
   if [[ $# -gt 1 ]]; then
