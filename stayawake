@@ -1,0 +1,24 @@
+#!/bin/bash
+set -euo pipefail
+
+case "${1:-status}" in
+  on)  /usr/bin/sudo /usr/bin/pmset -a disablesleep 1 ;;
+  off) /usr/bin/sudo /usr/bin/pmset -a disablesleep 0 ;;
+  status) ;;
+  *)
+    echo "Gebruik: $0 [on|off|status]" >&2
+    exit 2
+    ;;
+esac
+
+settings=$(/usr/bin/pmset -g)
+sleep_disabled=$(/usr/bin/awk '$1 == "SleepDisabled" { print $2 }' <<< "$settings")
+
+case "$sleep_disabled" in
+  1) echo "ON — je Mac blijft wakker." ;;
+  0|"") echo "OFF — je Mac kan weer in slaapstand gaan." ;;
+  *)
+    echo "Onverwachte pmset-waarde: $sleep_disabled" >&2
+    exit 1
+    ;;
+esac
