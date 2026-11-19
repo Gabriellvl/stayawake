@@ -3,6 +3,8 @@
 A sleep switch for your Mac. Turn it **on** to stay awake and **off** to
 allow sleep again.
 
+[![macOS checks](https://github.com/Gabriellvl/stayawake/actions/workflows/macos.yml/badge.svg)](https://github.com/Gabriellvl/stayawake/actions/workflows/macos.yml)
+
 | Command | What it does |
 | --- | --- |
 | `stayawake on` | Keeps your Mac awake |
@@ -23,10 +25,15 @@ Use `brew upgrade Gabriellvl/tap/stayawake` to update. Use
 `stayawake --help` lists all commands and `stayawake --version` shows
 the installed version.
 
-## Install manually
+## Download from GitHub
 
-Download the Bash script from [Releases](https://github.com/Gabriellvl/stayawake/releases/latest)
-and run these commands from the download folder:
+The [latest release](https://github.com/Gabriellvl/stayawake/releases/latest)
+offers the standalone script and a macOS archive with the script, README,
+and license. Verify your download with the matching entry in `SHA256SUMS`
+(`shasum -a 256 <filename>`).
+
+
+From the folder containing the downloaded or extracted script:
 
 ```bash
 mkdir -p "$HOME/.local/bin"
@@ -40,6 +47,15 @@ If your shell can't find `stayawake` by name, add this line to your
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
 ```
+
+## MacPorts
+
+An experimental [local Portfile](packaging/macports/sysutils/stayawake/Portfile)
+is available for MacPorts users. Clone this repo, add the absolute path to
+`packaging/macports` as a `file://` source above the default source in
+`sources.conf`, and run `portindex` from that directory. Then run
+`sudo port install stayawake` and `stayawake status`. See the
+[MacPorts local repository guide](https://guide.macports.org/chunked/development.local-repositories.html).
 
 ## Run from the repo
 
@@ -63,6 +79,11 @@ sleep behavior.
 
 Run `stayawake off` if you want normal sleep restored, then run
 `make uninstall` from the checkout or remove `~/.local/bin/stayawake`.
+
+## Platform support
+
+The current release supports macOS and uses its built-in `pmset`.
+Linux, Windows, BSD, and other systems still need their own sleep backends.
 
 ## License
 
