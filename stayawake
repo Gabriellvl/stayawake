@@ -1,24 +1,48 @@
 #!/bin/bash
 set -euo pipefail
 
-case "${1:-status}" in
+usage() {
+  cat <<'HELP'
+Usage: stayawake [on|off|status]
+
+  on       Keep your Mac awake
+  off      Allow your Mac to sleep
+  status   Show the current setting (default)
+
+Changing the setting requires an administrator password if sudo prompts.
+HELP
+}
+
+action=${1-status}
+if [[ $# -gt 1 ]]; then
+  usage >&2
+  exit 2
+fi
+
+case "$action" in
+  -h|--help) usage; exit 0 ;;
+  on|off|status) ;;
+  *) usage >&2; exit 2 ;;
+esac
+
+if [[ ! -x /usr/bin/pmset ]]; then
+  echo "stayawake requires macOS." >&2
+  exit 1
+fi
+
+case "$action" in
   on)  /usr/bin/sudo /usr/bin/pmset -a disablesleep 1 ;;
   off) /usr/bin/sudo /usr/bin/pmset -a disablesleep 0 ;;
-  status) ;;
-  *)
-    echo "Gebruik: $0 [on|off|status]" >&2
-    exit 2
-    ;;
 esac
 
 settings=$(/usr/bin/pmset -g)
 sleep_disabled=$(/usr/bin/awk '$1 == "SleepDisabled" { print $2 }' <<< "$settings")
 
 case "$sleep_disabled" in
-  1) echo "ON — je Mac blijft wakker." ;;
-  0|"") echo "OFF — je Mac kan weer in slaapstand gaan." ;;
+  1) echo "ON — your Mac stays awake." ;;
+  0|"") echo "OFF — your Mac can sleep." ;;
   *)
-    echo "Onverwachte pmset-waarde: $sleep_disabled" >&2
+    echo "Unexpected pmset value for SleepDisabled: $sleep_disabled" >&2
     exit 1
     ;;
 esac
