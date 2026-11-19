@@ -16,6 +16,7 @@ restore normal sleep. `stayawake status` tells you which mode you’re in.
 | `stayawake off` | Allows normal sleep |
 | `stayawake` or `stayawake status` | Shows the current setting |
 | `stayawake buddy` | Shows Harrie the Cane Corso, on watch or asleep |
+| `stayawake buddy whitney` | Shows Whitney in full-body terminal pixel art |
 | `stayawake updates` | Checks GitHub for a newer release |
 | `stayawake updates --open` | Opens the release page |
 
@@ -37,7 +38,7 @@ use [the Git checkout](#run-from-the-repo) to try the latest code.
 ## Meet the dogs
 
 **Whitney** is the white Dogo Argentino who inspired the watchdog and is the
-face of stayawake.
+face of stayawake. Run `stayawake buddy whitney` to see her in the terminal.
 
 **Harrie** is the Cane Corso in your terminal. He keeps watch when sleep is
 disabled, curls up when sleep is allowed, and perks up when a new release
@@ -97,6 +98,7 @@ is available for MacPorts users. Clone this repo, add the absolute path to
 git clone https://github.com/Gabriellvl/stayawake.git
 cd stayawake
 ./stayawake buddy
+./stayawake buddy whitney
 ./stayawake updates
 ```
 

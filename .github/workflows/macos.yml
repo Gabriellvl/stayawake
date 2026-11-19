@@ -23,6 +23,7 @@ jobs:
           bash tests/updates.sh
           ./stayawake --help
           ./stayawake --version
+          ./stayawake buddy whitney | grep -F 'Whitney · watchdog mascot'
           ./stayawake buddy | grep -E 'Harrie · (on watch|off duty)'
           ./stayawake status | grep -E '^(ON|OFF) '
           prefix="$RUNNER_TEMP/stayawake installation"

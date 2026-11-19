@@ -6,12 +6,13 @@ RELEASE_URL=https://github.com/Gabriellvl/stayawake/releases
 
 usage() {
   cat <<'HELP'
-Usage: stayawake [on|off|status|buddy|updates [--open]|--help|--version]
+Usage: stayawake [on|off|status|buddy [whitney]|updates [--open]|--help|--version]
 
   on              Keep your Mac awake
   off             Allow your Mac to sleep
   status          Show the current setting (default)
   buddy           See Harrie the Cane Corso on watch or asleep
+  buddy whitney   See Whitney, the Dogo Argentino mascot
   updates         Check GitHub for a newer release
   updates --open  Open the GitHub release page
   --help          Show this help
@@ -22,54 +23,136 @@ Set STAYAWAKE_NO_UPDATE_CHECK=1 to disable automatic release checks.
 HELP
 }
 
-draw_buddy() {
-  local mood=$1 sprite row pixel index color
-  case "$mood" in
-    asleep)
-      sprite='                 z Z
-     ######
-   ##++++++##   ######
-  ##++----+++###++++++##
-  #+++--+++++##++++++++#
-  ##+++#####+##++++++++#
-   ####======##########
-  #######     ########'
+buddy_sprite() {
+  case "$1" in
+    asleep) cat <<'SPRITE'
+
+
+
+
+
+
+
+
+                                  #
+                          ########+#######
+           #######      #######++++++++++###
+         ####-++++##   ####++++++++++++++++###
+       #####----+++######++++++++++++-+++++++##
+       ###++----+++++##++++++++++--------+++++#
+      ###++----++++===+++++++++++---------++++##
+  #######++#---++++====++++++++++---------+++++#
+ #######+####--+++++===++++++++++----------++++#
+ #..++++++#+++++++++====++++--------------++++##
+##+++++++++++++++++====++++---------------++++##
+#++++++++++++++++++++=++++-----####+-++++++####
+###+##########+###############################
+  ###########################################
+          ##############################
+
+SPRITE
       ;;
-    awake|alert)
-      if [[ $mood == alert ]]; then
-        printf '                  !!\n'
-      fi
-      sprite='      ##       ##
-    ###++#####++###
-    #+##+++++##++#
-    #++..+++..+++#
-    #+++#####++++#
-     #++##.##+++#
-      ###---###
-      #=======#
-     ###+++++###'
+    whitney) cat <<'SPRITE'
+                                     #
+                                 ####.####
+                                ##-.......#
+                               ##+---...####
+##                            ##+----....#.#####
+#++                          ##++---..........##
+ #+#                        ##+++---...........#
+ ##++       ######         #+++=+++-.........##
+  #+++#    #++++++#########++++==+++...########
+   #++++###++++++++++++++++++++===+++.##
+    #++++++++++++++++++++++++++++====##
+       ##++++++++++++++++++++++++++=##
+         ##++++++++++++++++++++++++-#
+          ##+++++++-######++++++++-#
+          ##++++++-#        +++++--
+          ##++++++#         +++++-#
+          #++++++-#         +++++-#
+          #+++++-#           +++--
+         #+++++-##           +++---
+        #+++++--#            +++-----
+       ##++++---             +++-------
+      ##++++-------         #+++-------
+      #+++++++-----         #+++++++#
+      #+++++++               +++++++#
+SPRITE
+      ;;
+    awake|alert) cat <<'SPRITE'
+                                  #
+                                 ##-#####
+                               ##----+++##
+                              ###-----+++#
+                              ##------..++######
+ #                           ##+-----++.++++++..
+###                          #+++----+++++-----#
+ ##             #############++++---++++++-----#
+ ###      ###++++++++++++++++++++=+-+++++------#
+  ##++   ##++++++++++++++++++++++====+++#-----#
+  ###++###+++++++++++++++++++++++=======#-----#
+    ##++++++++++++++++++++++++++++++===--
+     ###++++++++++++++++++++++++++++++#
+       ##++++++++++++++++++++++++++++#
+         #+++++++++++++++++++++++++-#
+          +++++++----++++++++++++---#
+         +++++++-------     +++++--##
+         ++++++-------      +++++--#
+        +++++++------       +++++--#
+        ++++++------        +++++---
+       +++++++------        +++++-----
+       +++#####-----        +####+++--
+        ########             #######--
+        ########             #######
+SPRITE
       ;;
   esac
+}
 
-  if [[ -t 1 && ${TERM:-dumb} != dumb && -z ${NO_COLOR+x} ]]; then
-    while IFS= read -r row; do
-      for ((index = 0; index < ${#row}; index++)); do
-        pixel=${row:index:1}
-        case "$pixel" in
-          '#') color=90 ;;
-          '+') color=37 ;;
-          '.') color=97 ;;
-          '-') color=30 ;;
-          '=') color=33 ;;
-          *) printf '%s' "$pixel"; continue ;;
-        esac
-        printf '\033[%sm█\033[0m' "$color"
-      done
-      printf '\n'
-    done <<< "$sprite"
-  else
-    printf '%s\n' "$sprite"
+buddy_color() {
+  color=''
+  case "$2" in
+    '=') color=214 ;;
+    ' ') color='' ;;
+    *)
+      if [[ $1 == whitney ]]; then
+        case "$2" in '#') color=240 ;; '+') color=230 ;; '.') color=255 ;; '-') color=180 ;; esac
+      else
+        case "$2" in '#') color=242 ;; '+') color=239 ;; '.') color=230 ;; '-') color=236 ;; esac
+      fi
+      ;;
+  esac
+}
+
+draw_buddy() {
+  local mood=$1 top bottom upper lower color index
+  case "$mood" in
+    asleep) printf '                     z Z\n' ;;
+    alert) printf '                                    !!\n' ;;
+  esac
+  if [[ ! -t 1 || ${TERM:-dumb} == dumb || -n ${NO_COLOR+x} ]]; then
+    buddy_sprite "$mood"
+    return
   fi
+
+  # Half blocks let two square pixels share each terminal cell.
+  while IFS= read -r top; do
+    IFS= read -r bottom || bottom=''
+    for ((index = 0; index < ${#top} || index < ${#bottom}; index++)); do
+      buddy_color "$mood" "${top:index:1}"; upper=$color
+      buddy_color "$mood" "${bottom:index:1}"; lower=$color
+      if [[ -n $upper && -n $lower ]]; then
+        printf '\033[38;5;%s;48;5;%sm▀\033[0m' "$upper" "$lower"
+      elif [[ -n $upper ]]; then
+        printf '\033[38;5;%sm▀\033[0m' "$upper"
+      elif [[ -n $lower ]]; then
+        printf '\033[38;5;%sm▄\033[0m' "$lower"
+      else
+        printf ' '
+      fi
+    done
+    printf '\n'
+  done < <(buddy_sprite "$mood")
 }
 
 valid_version() {
@@ -182,6 +265,11 @@ main() {
   local action=${1-status}
   if [[ $action == updates && $# == 2 && $2 == --open ]]; then
     /usr/bin/open "$RELEASE_URL/latest"
+    return
+  fi
+  if [[ $action == buddy && $# == 2 && $2 == whitney ]]; then
+    draw_buddy whitney
+    printf 'Whitney · watchdog mascot\n'
     return
   fi
   if [[ $# -gt 1 ]]; then
