@@ -3,11 +3,13 @@ set -euo pipefail
 
 usage() {
   cat <<'HELP'
-Usage: stayawake [on|off|status]
+Usage: stayawake [on|off|status|--help|--version]
 
   on       Keep your Mac awake
   off      Allow your Mac to sleep
   status   Show the current setting (default)
+  --help   Show this help
+  --version  Show the installed version
 
 Changing the setting requires an administrator password if sudo prompts.
 HELP
@@ -21,6 +23,7 @@ fi
 
 case "$action" in
   -h|--help) usage; exit 0 ;;
+  -V|--version) echo "stayawake 1.1.0"; exit 0 ;;
   on|off|status) ;;
   *) usage >&2; exit 2 ;;
 esac

@@ -9,7 +9,21 @@ allow sleep again.
 | `stayawake off` | Allows normal sleep |
 | `stayawake` or `stayawake status` | Shows the current setting |
 
-## Install
+## Install with Homebrew
+
+```bash
+brew install Gabriellvl/tap/stayawake
+stayawake status
+```
+
+Use `brew upgrade Gabriellvl/tap/stayawake` to update. Use
+`brew uninstall Gabriellvl/tap/stayawake` to remove the command. Run
+`stayawake off` before uninstalling if you want to restore normal sleep.
+
+`stayawake --help` lists all commands and `stayawake --version` shows
+the installed version.
+
+## Install manually
 
 Download the Bash script from [Releases](https://github.com/Gabriellvl/stayawake/releases/latest)
 and run these commands from the download folder:
