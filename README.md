@@ -4,7 +4,7 @@ Start a long-running AI task, turn on stayawake, and step away from your Mac.
 Run `stayawake status` to check the current setting and `stayawake off` to
 allow normal sleep again.
 
-[![Play the stayawake demo. Whitney, a white Dogo Argentino, sits beside a laptop.](docs/demo-cover.png)](#demo-video)
+[![Play the stayawake demo. Whitney, a white Dogo Argentino, sits beside a laptop.](docs/demo-cover.png)](https://github.com/user-attachments/assets/30608a34-13cb-48af-8264-e16592a7aa1f)
 
 [Watch the demo](#demo-video) · [Install with Homebrew](#install-with-homebrew) · [Meet Whitney](#whitney-your-terminal-watchdog)
 
@@ -60,6 +60,8 @@ watched repositories in your
 ## Demo video
 
 See the sleep switch in action in 17 seconds.
+
+https://github.com/user-attachments/assets/30608a34-13cb-48af-8264-e16592a7aa1f
 
 ## Download from GitHub
 
