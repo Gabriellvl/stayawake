@@ -1,22 +1,12 @@
-<p align="center">
-  <img src="docs/whitney-logo.png" width="112" alt="Whitney, the stayawake logo">
-</p>
+# stayawake · Keep your Mac awake while your AI agents work
 
-<h1 align="center">stayawake</h1>
+Start a long-running AI task, turn on stayawake, and step away from your Mac.
+Run `stayawake status` to check the current setting and `stayawake off` to
+allow normal sleep again.
 
-<p align="center">
-  <a href="#install-with-homebrew">Install</a> ·
-  <a href="#whitney-your-terminal-watchdog">Meet Whitney</a> ·
-  <a href="#whitneys-bed">Wake Whitney</a>
-</p>
+[![Play the stayawake demo. Whitney, a white Dogo Argentino, sits beside a laptop.](docs/demo-cover.png)](https://github.com/user-attachments/assets/30608a34-13cb-48af-8264-e16592a7aa1f)
 
-**Keep your Mac awake while your agents work.**
-
-Install stayawake when a long-running agent, build, or script needs your Mac
-to stay awake. Use `stayawake on` before starting, then `stayawake off` to
-restore normal sleep. `stayawake status` tells you which mode you’re in.
-
-**Meet Whitney, the real-life Dogo Argentino behind stayawake.** Her head is the logo and her full-body sprite is your terminal watchdog.
+[Watch the demo](#demo-video) · [Install with Homebrew](#install-with-homebrew) · [Meet Whitney](#whitney-your-terminal-watchdog)
 
 ![Animated terminal preview of Whitney on watch, asleep, and showing an example release alert.](docs/whitney-terminal.gif)
 
@@ -69,9 +59,9 @@ watched repositories in your
 
 ## Demo video
 
-<img src="docs/whitney-logo.png" width="42" align="right" alt="">
+See the sleep switch in action in 17 seconds.
 
-*Video coming soon. The terminal GIF above previews the sleep switch and release alerts.*
+https://github.com/user-attachments/assets/30608a34-13cb-48af-8264-e16592a7aa1f
 
 ## Download from GitHub
 
